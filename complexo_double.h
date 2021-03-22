@@ -6,7 +6,7 @@
 #undef TIPO
 
 #define TYPE double
-#define TYPED(COISA) COISA ## _D
+#define TYPED(COISA) D_ ## COISA
 #define TIPO "lf"
 
 #include "Complexo.h"

@@ -5,7 +5,7 @@
 #undef TIPO
 
 #define TYPE long int
-#define TYPED(COISA) COISA ## _LI
+#define TYPED(COISA) LI_ ## COISA
 #define TIPO "ld"
 
 #include "Complexo.c"

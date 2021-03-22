@@ -9,7 +9,7 @@
 
 
 #define TYPE double
-#define TYPED(COISA) COISA ## _D
+#define TYPED(COISA) D_ ## COISA
 #define TIPO
 
 #include "Complexo.h"
