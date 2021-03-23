@@ -1,5 +1,4 @@
-#ifndef COMPLEXO_RACIONAL_H
-#define COMPLEXO_RACIONAL_H
+#include "complexo_racional.h"
 
 #undef TYPE
 #undef TYPED
@@ -9,11 +8,8 @@
 #define TYPED(COISA) R_ ## COISA
 #define TIPO "ld"
 
-#include "Complexo.h"
-#include "racional.h"
+#include "Complexo.c"
 
 #undef TYPE
 #undef TYPED
 #undef TIPO
-
-#endif
