@@ -9,7 +9,7 @@ OBJ=$(C_SOURCE:.c=.o)
 
 CC=gcc
 
-CC_FLAGS=-c -ansi -Wall -pedantic
+CC_FLAGS=-c
 
 
 all: $(PROJ_NAME)
@@ -22,6 +22,9 @@ $(PROJ_NAME): $(OBJ)
 
 main.o: main.c $(H.SOURCE)
 	$(CC) -o $@ $< $(CC_FLAGS) -lm
+
+run:
+	./complexo
 
 clean:
 	rm -rf *.o *~ complexo

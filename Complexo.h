@@ -13,6 +13,8 @@ void TYPED(destroiComplexo)(TYPED(complexo_t)* complexo);
 
 void TYPED(atribuiComplexo)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2);
 
+TYPED(complexo_t)* TYPED(copiaComplexo)(TYPED(complexo_t)* complexo);
+
 void TYPED(imprimeComplexo)(TYPED(complexo_t)* complexo);
 
 TYPE TYPED(retornaReal)(TYPED(complexo_t)* complexo);
@@ -52,6 +54,10 @@ int TYPED(verificaImaginario)(TYPED(complexo_t)* complexo);
 int TYPED(comparaModulos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2);
 
 int TYPED(comparaFase)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2);
+
+TYPED(complexo_t)* TYPED(alteraMagnitude)(TYPED(complexo_t)* complexo, int escalar);
+
+TYPED(complexo_t)* TYPED(alteraFase)(TYPED(complexo_t)* complexo);
 
 #endif
 #endif

@@ -6,23 +6,30 @@
 #ifdef TYPE
 #ifdef TYPED
 
-TYPED(complexo_t)* TYPED(criaComplexo)(TYPE a, TYPE b) { // funcionou
+TYPED(complexo_t)* TYPED(criaComplexo)(TYPE a, TYPE b) {
     TYPED(complexo_t)* complexo = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
     complexo->a = a;
     complexo->b = b;
     return complexo;
 }
 
-void TYPED(destroiComplexo)(TYPED(complexo_t)* complexo) { //funcionou
+void TYPED(destroiComplexo)(TYPED(complexo_t)* complexo) {
     free(complexo);
 }
 
-void TYPED(atribuiComplexo)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) { //antes deu erro mas agora foi
+void TYPED(atribuiComplexo)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     complexo1->a = complexo2->a;
     complexo1->b = complexo2->b;
 }
 
-void TYPED(imprimeComplexo)(TYPED(complexo_t)* complexo) { //funcionou
+TYPED(complexo_t)* TYPED(copiaComplexo)(TYPED(complexo_t)* complexo) {
+    TYPED(complexo_t)* copia = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
+    copia->a = complexo->a;
+    copia->b = complexo->b;
+    return copia;
+}
+
+void TYPED(imprimeComplexo)(TYPED(complexo_t)* complexo) {
     char parametros[50];
     strcpy(parametros,"");
     strcat(parametros," %");
@@ -38,31 +45,31 @@ void TYPED(imprimeComplexo)(TYPED(complexo_t)* complexo) { //funcionou
     printf("\n");
 }
 
-TYPE TYPED(retornaReal)(TYPED(complexo_t)* complexo) { //funcionou
+TYPE TYPED(retornaReal)(TYPED(complexo_t)* complexo) {
     return complexo->a;
 }
 
-TYPE TYPED(retornaImaginaria)(TYPED(complexo_t)* complexo) { //funcionou
+TYPE TYPED(retornaImaginaria)(TYPED(complexo_t)* complexo) {
     return complexo->b;
 }
 
-double TYPED(retornaMagnitude)(TYPED(complexo_t)* complexo) { //funcionou mas nao sei se ta certo o valor
+double TYPED(retornaMagnitude)(TYPED(complexo_t)* complexo) {
     return (double)sqrt(complexo->a * complexo->a + complexo->b * complexo->b);
 }
 
-double TYPED(retornaFase)(TYPED(complexo_t)* complexo) { //funcionou mas nao sei se ta certo o valor tambem
+double TYPED(retornaFase)(TYPED(complexo_t)* complexo) {
     return atan(complexo->b / complexo->a);
 }
 
-void TYPED(mudaReal)(TYPED(complexo_t)* complexo,TYPE real) { //funcionou
+void TYPED(mudaReal)(TYPED(complexo_t)* complexo,TYPE real) {
     complexo->a = real;
 }
 
-void TYPED(mudaImaginaria)(TYPED(complexo_t)* complexo,TYPE imaginaria) { //funcionou
+void TYPED(mudaImaginaria)(TYPED(complexo_t)* complexo,TYPE imaginaria) {
     complexo->b = imaginaria;
 }
 
-TYPED(complexo_t)* TYPED(calculaConjugado)(TYPED(complexo_t)* complexo) { //funcionou
+TYPED(complexo_t)* TYPED(calculaConjugado)(TYPED(complexo_t)* complexo) {
     TYPED(complexo_t)* conjugado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
     conjugado->a = complexo->a;
     conjugado->b = -complexo->b;
@@ -189,7 +196,20 @@ int TYPED(comparaFase)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo
     else {
         return -1;
     }
-    
+}
+
+TYPED(complexo_t)* TYPED(alteraMagnitude)(TYPED(complexo_t)* complexo, int escalar) {
+    TYPED(complexo_t)* escalonado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
+    escalonado->a = complexo->a * escalar;
+    escalonado->b = complexo->b * escalar;
+    return escalonado;
+}
+
+TYPED(complexo_t)* TYPED(alteraFase)(TYPED(complexo_t)* complexo) {
+    TYPED(complexo_t)* transformado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
+    transformado->a = complexo->a;
+    transformado->b = -complexo->b;
+    return transformado;
 }
 
 #endif
