@@ -83,11 +83,13 @@ TYPED(complexo_t)* TYPED(somaComplexos)(TYPED(complexo_t)* complexo1, TYPED(comp
     return soma;
 }
 
-TYPED(complexo_t)* TYPED(acumulaSoma)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
-    TYPED(complexo_t)* acumulado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    acumulado->a = complexo1->a + complexo2->a;
-    acumulado->b = complexo1->b + complexo2->b;
-    return acumulado;
+void TYPED(acumulaSoma)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
+    TYPED(complexo_t)* temp = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
+    temp->a = complexo1->a + complexo2->a;
+    temp->b = complexo1->b + complexo2->b;
+    complexo1->a = temp->a;
+    complexo1->b = temp->b;
+    free(temp);
 }
 
 TYPED(complexo_t)* TYPED(subtraiComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
@@ -104,11 +106,13 @@ TYPED(complexo_t)* TYPED(produtoComplexos)(TYPED(complexo_t)* complexo1, TYPED(c
     return produto;
 }
 
-TYPED(complexo_t)* TYPED(acumulaProduto)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
-    TYPED(complexo_t)* acumulado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));;
-    acumulado->a = complexo1->a * complexo2->a - complexo1->b * complexo2->b;
-    acumulado->b = complexo1->a * complexo2->b + complexo1->b * complexo2->a;
-    return acumulado;
+void TYPED(acumulaProduto)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
+    TYPED(complexo_t)* temp = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
+    temp->a = complexo1->a;
+    temp->b = complexo1->b;
+    complexo1->a = temp->a * complexo2->a - temp->b * complexo2->b;
+    complexo1->b = temp->a * complexo2->b + temp->b * complexo2->a;
+    free(temp);
 }
 
 TYPED(complexo_t)* TYPED(divideComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
@@ -137,9 +141,11 @@ TYPED(complexo_t)* TYPED(operacaoComplexo)(TYPED(complexo_t)* complexo1, TYPED(c
     } else if (strcmp(operador,"/") == 0) {
         resultado = TYPED(divideComplexos)(complexo1,complexo2);
     } else if (strcmp(operador,"+=") == 0) {
-        resultado = TYPED(acumulaSoma)(complexo1,complexo2);
+        TYPED(acumulaSoma)(complexo1,complexo2);
+        return complexo1;
     } else if (strcmp(operador,"*=") == 0) {
-        resultado = TYPED(acumulaProduto)(complexo1,complexo2);
+        TYPED(acumulaProduto)(complexo1,complexo2);
+        return complexo1;
     }
 
     return resultado;

@@ -12,3 +12,5 @@ add_executable(Numeros_Complexos
         complexo_ld.c
         complexo_racional.h
         main.c)
+
+target_link_libraries(Numeros_Complexos m)
