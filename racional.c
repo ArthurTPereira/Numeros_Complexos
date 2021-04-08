@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
 #include "racional.h"
 
 struct racional {
@@ -86,7 +85,6 @@ int verificaAmbos(tRacional* racional) {
     } else return 0;
 }
 
-
 tRacional* somaRacional(tRacional* racional1, tRacional* racional2) {
     tRacional* soma = alocaRacional();
     soma->den = racional1->den * racional2->den;
@@ -94,9 +92,8 @@ tRacional* somaRacional(tRacional* racional1, tRacional* racional2) {
     return soma;
 }
 
-tRacional* acumulaSoma(tRacional* racional1, tRacional* racional2) {
+void acumulaSoma(tRacional* racional1, tRacional* racional2) {
     racional1 = somaRacional(racional1,racional2);
-    return racional1;
 }
 
 tRacional* subtraiRacional(tRacional* racional1, tRacional* racional2) {
@@ -113,10 +110,9 @@ tRacional* multiplicaRacional(tRacional* racional1, tRacional* racional2) {
     return produto;
 }
 
-tRacional* acumulaProduto(tRacional* racional1, tRacional* racional2) {
+void acumulaProduto(tRacional* racional1, tRacional* racional2) {
     racional1->num = racional1->num * racional2->num;
     racional1->den = racional1->den * racional2->den;
-    return racional1;
 }
 
 tRacional* divideRacional(tRacional* racional1, tRacional* racional2) {
@@ -152,6 +148,24 @@ tRacional* raizRacional(tRacional* racional, int precisao) {
     return raiz;
 }
 
+tRacional* doubleParaRacional(double valor) {
+    tRacional* convertido = alocaRacional();
+
+    long int den = 1;
+    int i=0;
+    for (i = 0; i < 6; i++) { //Precisao de 6
+        den *= 10;
+    }
+    
+    long int num = valor * den + 0.5;
+    long int mdc = algoritmoEuclideano(num, den);
+
+    convertido->num = num / mdc;
+    convertido->den = den / mdc;
+    
+    return convertido;
+}
+
 tRacional* reduzRacional(tRacional* racional) {
     long int mdc = algoritmoEuclideano(racional->num,racional->den);
     racional->num = racional->num / mdc;
@@ -168,10 +182,9 @@ double converteRacional(tRacional* racional) {
     return value;
 }
 
-void imprimeCSV(tRacional* racional) {
-    char arquivo[] = "racional.csv";
-    FILE* r = fopen(arquivo,"a+");
-
-    fprintf(r,"%ld,%ld\n",racional->num,racional->den);
-    fclose(r);
+tRacional* inverteRacional(tRacional* racional) {
+    tRacional* invertido = alocaRacional();
+    invertido->num = -racional->num;
+    invertido->den = racional->den;
+    return invertido;
 }

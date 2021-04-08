@@ -1,13 +1,12 @@
 #ifdef TYPE
 #ifdef TYPED
 
-
 typedef struct TYPED(complexo) {
-    TYPE a;
-    TYPE b;
+    TYPE real;
+    TYPE img;
 } TYPED(complexo_t);
 
-TYPED(complexo_t)* TYPED(criaComplexo)(TYPE a, TYPE b);
+TYPED(complexo_t)* TYPED(criaComplexo)(TYPE real, TYPE img);
 
 void TYPED(destroiComplexo)(TYPED(complexo_t)* complexo);
 

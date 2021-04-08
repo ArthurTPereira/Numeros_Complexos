@@ -6,10 +6,10 @@
 #ifdef TYPE
 #ifdef TYPED
 
-TYPED(complexo_t)* TYPED(criaComplexo)(TYPE a, TYPE b) {
+TYPED(complexo_t)* TYPED(criaComplexo)(TYPE real, TYPE img) {
     TYPED(complexo_t)* complexo = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    complexo->a = a;
-    complexo->b = b;
+    complexo->real = real;
+    complexo->img = img;
     return complexo;
 }
 
@@ -18,14 +18,14 @@ void TYPED(destroiComplexo)(TYPED(complexo_t)* complexo) {
 }
 
 void TYPED(atribuiComplexo)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
-    complexo1->a = complexo2->a;
-    complexo1->b = complexo2->b;
+    complexo1->real = complexo2->real;
+    complexo1->img = complexo2->img;
 }
 
 TYPED(complexo_t)* TYPED(copiaComplexo)(TYPED(complexo_t)* complexo) {
     TYPED(complexo_t)* copia = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    copia->a = complexo->a;
-    copia->b = complexo->b;
+    copia->real = complexo->real;
+    copia->img = complexo->img;
     return copia;
 }
 
@@ -34,98 +34,98 @@ void TYPED(imprimeComplexo)(TYPED(complexo_t)* complexo) {
     strcpy(parametros,"");
     strcat(parametros," %");
     strcat(parametros,TIPO);
-    if(complexo->b >=0) {
+    if(complexo->img >=0) {
         strcat(parametros," +");
     }
     strcat(parametros," %");
     strcat(parametros,TIPO);
     strcat(parametros,"i");
 
-    printf(parametros,complexo->a,complexo->b);
+    printf(parametros,complexo->real,complexo->img);
     printf("\n");
 }
 
 TYPE TYPED(retornaReal)(TYPED(complexo_t)* complexo) {
-    return complexo->a;
+    return complexo->real;
 }
 
 TYPE TYPED(retornaImaginaria)(TYPED(complexo_t)* complexo) {
-    return complexo->b;
+    return complexo->img;
 }
 
 double TYPED(retornaMagnitude)(TYPED(complexo_t)* complexo) {
-    return (double)sqrt(complexo->a * complexo->a + complexo->b * complexo->b);
+    return (double)sqrt(complexo->real * complexo->real + complexo->img * complexo->img);
 }
 
 double TYPED(retornaFase)(TYPED(complexo_t)* complexo) {
-    return atan(complexo->b / complexo->a);
+    return atan(complexo->img / complexo->real);
 }
 
 void TYPED(mudaReal)(TYPED(complexo_t)* complexo,TYPE real) {
-    complexo->a = real;
+    complexo->real = real;
 }
 
 void TYPED(mudaImaginaria)(TYPED(complexo_t)* complexo,TYPE imaginaria) {
-    complexo->b = imaginaria;
+    complexo->img = imaginaria;
 }
 
 TYPED(complexo_t)* TYPED(calculaConjugado)(TYPED(complexo_t)* complexo) {
     TYPED(complexo_t)* conjugado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    conjugado->a = complexo->a;
-    conjugado->b = -complexo->b;
+    conjugado->real = complexo->real;
+    conjugado->img = -complexo->img;
     return conjugado;
 }
 
 TYPED(complexo_t)* TYPED(somaComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* soma = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    soma->a = complexo1->a + complexo2->a;
-    soma->b = complexo1->b + complexo2->b;
+    soma->real = complexo1->real + complexo2->real;
+    soma->img = complexo1->img + complexo2->img;
     return soma;
 }
 
 void TYPED(acumulaSoma)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* temp = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    temp->a = complexo1->a + complexo2->a;
-    temp->b = complexo1->b + complexo2->b;
-    complexo1->a = temp->a;
-    complexo1->b = temp->b;
+    temp->real = complexo1->real + complexo2->real;
+    temp->img = complexo1->img + complexo2->img;
+    complexo1->real = temp->real;
+    complexo1->img = temp->img;
     free(temp);
 }
 
 TYPED(complexo_t)* TYPED(subtraiComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* subtracao = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    subtracao->a = complexo1->a - complexo2->a;
-    subtracao->b = complexo1->b - complexo2->b;
+    subtracao->real = complexo1->real - complexo2->real;
+    subtracao->img = complexo1->img - complexo2->img;
     return subtracao;
 }
 
 TYPED(complexo_t)* TYPED(produtoComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* produto = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    produto->a = complexo1->a * complexo2->a - complexo1->b * complexo2->b;
-    produto->b = complexo1->a * complexo2->b + complexo1->b * complexo2->a;
+    produto->real = complexo1->real * complexo2->real - complexo1->img * complexo2->img;
+    produto->img = complexo1->real * complexo2->img + complexo1->img * complexo2->real;
     return produto;
 }
 
 void TYPED(acumulaProduto)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* temp = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    temp->a = complexo1->a;
-    temp->b = complexo1->b;
-    complexo1->a = temp->a * complexo2->a - temp->b * complexo2->b;
-    complexo1->b = temp->a * complexo2->b + temp->b * complexo2->a;
+    temp->real = complexo1->real;
+    temp->img = complexo1->img;
+    complexo1->real = temp->real * complexo2->real - temp->img * complexo2->img;
+    complexo1->img = temp->real * complexo2->img + temp->img * complexo2->real;
     free(temp);
 }
 
 TYPED(complexo_t)* TYPED(divideComplexos)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo2) {
     TYPED(complexo_t)* divisao = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    TYPE div1 = ((complexo2->a * complexo2->a) + (complexo2->b * complexo2->b));
-    TYPE div2 = ((complexo2->a * complexo2->a) + (complexo2->b * complexo2->b));
+    TYPE div1 = ((complexo2->real * complexo2->real) + (complexo2->img * complexo2->img));
+    TYPE div2 = ((complexo2->real * complexo2->real) + (complexo2->img * complexo2->img));
     if (div1 == 0 || div2 == 0) {
         printf("Nao e possivel dividir por zero.\n");
         free(divisao);
         return NULL;
     }
-    divisao->a = (((complexo1->a * complexo2->a) + (complexo1->b * complexo2->b)) / div1);
-    divisao->b = (((-complexo1->a * complexo2->b) + (complexo1->b * complexo2->a)) / div2);
+    divisao->real = (((complexo1->real * complexo2->real) + (complexo1->img * complexo2->img)) / div1);
+    divisao->img = (((-complexo1->real * complexo2->img) + (complexo1->img * complexo2->real)) / div2);
     return divisao;
 }
 
@@ -161,7 +161,7 @@ int TYPED(verificaModulo)(TYPED(complexo_t)* complexo) {
 }
 
 int TYPED(verificaReal)(TYPED(complexo_t)* complexo) {
-    if (complexo->b >= -0.00001 && complexo->b <= 0.00001) {
+    if (complexo->real >= -0.00001 && complexo->real <= 0.00001) {
         return 1;
     } else {
         return 0;
@@ -169,7 +169,7 @@ int TYPED(verificaReal)(TYPED(complexo_t)* complexo) {
 }
 
 int TYPED(verificaImaginario)(TYPED(complexo_t)* complexo) {
-    if (complexo->a >= -0.00001 && complexo->a <= 0.00001) {
+    if (complexo->img >= -0.00001 && complexo->img <= 0.00001) {
         return 1;
     } else {
         return 0;
@@ -206,15 +206,15 @@ int TYPED(comparaFase)(TYPED(complexo_t)* complexo1, TYPED(complexo_t)* complexo
 
 TYPED(complexo_t)* TYPED(alteraMagnitude)(TYPED(complexo_t)* complexo, int escalar) {
     TYPED(complexo_t)* escalonado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    escalonado->a = complexo->a * escalar;
-    escalonado->b = complexo->b * escalar;
+    escalonado->real = complexo->real * escalar;
+    escalonado->img = complexo->img * escalar;
     return escalonado;
 }
 
 TYPED(complexo_t)* TYPED(alteraFase)(TYPED(complexo_t)* complexo) {
     TYPED(complexo_t)* transformado = (TYPED(complexo_t)*) malloc(sizeof(TYPED(complexo_t)));
-    transformado->a = complexo->a;
-    transformado->b = -complexo->b;
+    transformado->real = complexo->real;
+    transformado->img = -complexo->img;
     return transformado;
 }
 
